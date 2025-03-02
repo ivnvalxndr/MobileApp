@@ -12,7 +12,7 @@
             <Frame BackgroundColor="#fcfcfc" Margin="80,0" Padding="15" CornerRadius="15">
                 <StackLayout>
                     <Entry x:Name="userInput" WidthRequest="200" Placeholder="Введите город" />
-                    <Button x:Name="getWeather" Text="Получить" BackgroundColor="#e6b035" TextColor="#8f6b18" FontAttributes="Bold"/>
+                    <Button x:Name="getWeather" Clicked="GetWeather_OnClicked" Text="Получить" BackgroundColor="#e6b035" TextColor="#8f6b18" FontAttributes="Bold"/>
             </StackLayout>
             </Frame>
         <Label x:Name="resultLabel" Text="Some Weather" HorizontalOptions="Center"  FontSize="25"  TextColor="#333" Margin="0,0,0,50" />
