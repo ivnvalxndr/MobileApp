@@ -15,6 +15,6 @@
                     <Button x:Name="getWeather" Clicked="GetWeather_OnClicked" Text="Получить" BackgroundColor="#e6b035" TextColor="#8f6b18" FontAttributes="Bold"/>
             </StackLayout>
             </Frame>
-        <Label x:Name="resultLabel" Text="Some Weather" HorizontalOptions="Center"  FontSize="25"  TextColor="#333" Margin="0,0,0,50" />
+        <Label x:Name="resultLabel" Text="" HorizontalOptions="Center"  FontSize="25"  TextColor="#333" Margin="0,0,0,50" />
     </StackLayout>
 </ContentPage>
