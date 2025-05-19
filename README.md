@@ -13,6 +13,8 @@
 ## 📱 Скриншоты
 
 > ![image](https://github.com/user-attachments/assets/1a1ffb39-c687-4269-a2fb-4c50b9631b27)
+> ![image](https://github.com/user-attachments/assets/64ac23bf-bf20-4ca0-81ba-794d4bb52d54)
+
 
 
 ---
