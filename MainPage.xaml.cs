@@ -5,40 +5,71 @@ namespace MobileApp
 {
     public partial class MainPage : ContentPage
     {
-        const string API = "ca88e8c853d9c9e518c3bfe1f4ff3cae";
+        private static readonly HttpClient httpClient = new HttpClient();
+        private const string SensorUrl = "http://85.209.229.161:5001/sensor";
 
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private async void GetWeather_OnClicked(object? sender, EventArgs e)
+        private void UpdateTime(string time)
         {
-            string city = userInput.Text.Trim();
-            if (city.Length < 2)
+            if (DateTime.TryParse(time, out var parsedTime))
             {
-                await DisplayAlert("Ошибка", "Город должен иметь больше символов", "Okay");
-                return;
+                TimeLabel.Text = parsedTime.ToString("HH:mm");
             }
-            
-            string url = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API}&units=metric";
+            else
+            {
+                TimeLabel.Text = "Время неизвестно";
+            }
+        }
+
+        private async Task<JObject?> FetchSensorDataAsync()
+        {
             try
             {
-                using (WebClient client = new WebClient())
+                using (var client = new WebClient())
                 {
-                    string response = client.DownloadString(url);
-
-                    // Парсим json
-                    var json = JObject.Parse(response);
-                    string temp = json["main"]["temp"].ToString();
-                    resultLabel.Text = "Погода сейчас: " + temp + "\u00b0C";
+                    string response = await client.DownloadStringTaskAsync(SensorUrl);
+                    return JObject.Parse(response);
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", ex.Message, "Okay");
-                throw;
+                await DisplayAlert("Ошибка", ex.Message, "Ок");
+                return null;
             }
+        }
+
+        private async void OnGetTemperatureClicked(object? sender, EventArgs e)
+        {
+            var json = await FetchSensorDataAsync();
+            if (json == null) return;
+
+            resultTemp.Text = $"{json["Температура"]}°C";
+            UpdateTime(json["Время"]?.ToString() ?? "");
+        }
+
+        private async void OnGetHumidityClicked(object? sender, EventArgs e)
+        {
+            var json = await FetchSensorDataAsync();
+            if (json == null) return;
+
+            resultHum.Text = $"{json["Влажность"]} %";
+            UpdateTime(json["Время"]?.ToString() ?? "");
+        }
+
+        private async void OnGetPrecipitationClicked(object? sender, EventArgs e)
+        {
+            var json = await FetchSensorDataAsync();
+            if (json == null) return;
+
+            string hum = json["Осадки"]?.ToString();
+            PrecipitationLabel.Text = $"{hum}";
+
+            PrecipitationImage.Source = hum.ToLower().Contains("сухо") ? "sunny.png" : "rainy.png";
+            UpdateTime(json["Время"]?.ToString() ?? "");
         }
     }
 }

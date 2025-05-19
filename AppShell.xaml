@@ -8,7 +8,7 @@
     Title="MobileApp">
 
     <ShellContent
-        Title="Home"
+        Title="Климат RIS22BZU Иванов,Меркушев"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 

@@ -1,20 +1,124 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileApp.MainPage">
 
-    
-    <StackLayout BackgroundColor="#ededed">
-        <StackLayout BackgroundColor="#194880">
-            <Label Text="Погода" HorizontalOptions="Center" Margin="0,50,0,15" FontSize="30" TextColor="#091c33" FontAttributes="Bold"/>
-            <Image  Margin="0,0,0,45" Source="https://cdn-icons-png.flaticon.com/512/1163/1163763.png" WidthRequest="200" HeightRequest="150" Aspect="AspectFit"/>
-        </StackLayout>
-            <Frame BackgroundColor="#fcfcfc" Margin="80,0" Padding="15" CornerRadius="15">
-                <StackLayout>
-                    <Entry x:Name="userInput" WidthRequest="200" Placeholder="Введите город" />
-                    <Button x:Name="getWeather" Clicked="GetWeather_OnClicked" Text="Получить" BackgroundColor="#e6b035" TextColor="#8f6b18" FontAttributes="Bold"/>
-            </StackLayout>
-            </Frame>
-        <Label x:Name="resultLabel" Text="" HorizontalOptions="Center"  FontSize="25"  TextColor="#333" Margin="0,0,0,50" />
-    </StackLayout>
+    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.MainPage"
+             BackgroundColor="#FFFFFF"
+             Title="РИС22БЗУ Иванов,Меркушев">
+
+        <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25">
+
+        <!-- Время -->
+        <Label x:Name="TimeLabel"
+               FontSize="22"
+               FontAttributes="Bold"
+               TextColor="#555"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Text="00:00:00" />
+
+        <!-- Заголовок -->
+        <Label Text="Климатическое состояние"
+               FontSize="26"
+               FontAttributes="Bold"
+               TextColor="#333"
+               HorizontalOptions="Center" />
+
+        <!-- Температура -->
+        <Frame BackgroundColor="#FFEBEE"
+               CornerRadius="20"
+               Padding="20"
+               HasShadow="False">
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Label Text="Температура"
+                       FontSize="14"
+                       TextColor="#D32F2F"
+                       HorizontalOptions="Center" />
+                <Label x:Name="resultTemp"   
+                       Text=""
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#D32F2F"
+                       HorizontalOptions="Center" />
+                <Image Source="thermometer.png"
+                       HeightRequest="50"
+                       WidthRequest="50"
+                       HorizontalOptions="Center" />
+                <Button Text="Получить"
+                        BackgroundColor="#D32F2F"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="10,5"
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetTemperatureClicked" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Влажность -->
+        <Frame BackgroundColor="#E3F2FD"
+               CornerRadius="20"
+               Padding="20"
+               HasShadow="False">
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Label Text="Влажность"
+                       FontSize="14"
+                       TextColor="#1976D2"
+                       HorizontalOptions="Center" />
+                <Label x:Name="resultHum" 
+                       Text=""
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#1976D2"
+                       HorizontalOptions="Center" />
+                <Image Source="humidity.png"
+                       HeightRequest="50"
+                       WidthRequest="50"
+                       HorizontalOptions="Center" />
+                <Button Text="Получить"
+                        BackgroundColor="#1976D2"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="10,5"
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetHumidityClicked" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Осадки -->
+        <Frame BackgroundColor="#E8F5E9"
+               CornerRadius="20"
+               Padding="20"
+               HasShadow="False">
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Label Text="Осадки"
+                       FontSize="14"
+                       TextColor="#2E7D32"
+                       HorizontalOptions="Center" />
+                <Label x:Name="PrecipitationLabel"
+                       Text=""
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#388E3C"
+                       HorizontalOptions="Center" />
+                <Image x:Name="PrecipitationImage"
+                       Source="sunny.png"
+                       HeightRequest="50"
+                       WidthRequest="50"
+                       HorizontalOptions="Center" />
+                <Button Text="Получить"
+                        BackgroundColor="#388E3C"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="10,5"
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetPrecipitationClicked" />
+            </VerticalStackLayout>
+        </Frame>
+
+    </VerticalStackLayout>
+     </ScrollView>
 </ContentPage>
